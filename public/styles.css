@@ -43,14 +43,28 @@ body {
 }
 
 .card {
+  display: grid;
   width: 100%;
   height: 100%;
   margin: 0;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
 }
 
-.cardImg {
+.cardBackground {
+  z-index: 3;
   width: 100%;
   height: 100%;
   object-fit: fill;
   margin: 0;
+  grid-area: 1/1/2/2;
+}
+
+.cardImg {
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  margin: 0;
+  grid-area: 1/1/2/2;
 }
