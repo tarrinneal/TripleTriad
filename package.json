@@ -1,7 +1,7 @@
 {
-  "name": "MVDLibs",
+  "name": "TripleTriad",
   "version": "1.0.0",
-  "description": "Fun little ad libs app",
+  "description": "Little Throw Back",
   "main": "index.js",
   "scripts": {
     "start": "node server/index.js",

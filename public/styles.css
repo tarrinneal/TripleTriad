@@ -1,0 +1,56 @@
+body {
+  background: black;
+}
+
+#app {
+  width: 90vw;
+  height: 52.5vw;
+  max-height: 95vh;
+  max-width: 162.857vh;
+  margin: 0 auto;
+}
+
+#board {
+  width: 90vw;
+  height: 52.5vw;
+  max-height: 95vh;
+  max-width: 162.857vh;
+  display: grid;
+  grid-template-columns: 1fr 49% 1fr;
+  grid-template-rows: 7.5% repeat(6, auto) 7.5%;
+}
+
+#boardImage {
+  grid-area: 1/1/9/4;
+  object-fit: contain;
+  z-index: 0;
+  width: 90vw;
+  height: 52.5vw;
+  max-height: 95vh;
+  max-width: 162.857vh;
+}
+
+#innerBoard {
+  z-index: 1;
+  grid-area: 2/2/8/3;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.boardSlot {
+  z-index: 2;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.cardImg {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  margin: 0;
+}
