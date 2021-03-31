@@ -10,7 +10,7 @@ const BoardSlot = ({loc, card}) => {
   }
     return (
       <div key={loc} className={`boardSlot ${loc}`} style={{gridColumn: (loc % 3) || 3, gridRow: row}}>
-       {card ? <Card card={card} /> : loc}
+       {card ? <Card card={card} loc={loc} /> : loc}
       </div>
     )
 }
