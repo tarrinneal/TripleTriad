@@ -39,6 +39,7 @@ class Login extends React.Component {
           <input type="submit" value="Log in" onClick={this.handleSubmit}/>
           <input type="submit" value="Sign Up" onClick={this.handleSubmit}/>
         </form>
+        <div>Don't use your real passwords here, I didn't spend anything on security</div>
         {loginFailed && <div id="loginFailed">{loginFailed}</div>}
         {signupFailed && <div id="signupFailed">{signupFailed}</div>}
       </div>
