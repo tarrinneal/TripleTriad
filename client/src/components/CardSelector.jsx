@@ -1,26 +1,17 @@
-import React from "react";
-import cards from "../cardStats.js"
-
+import React from 'react';
+import cards from '../cardStats.js';
 
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {
-    };
-
-
+    this.state = {};
   }
 
-  componentDidMount () {
-
-  }
-
+  componentDidMount() {}
 
   render() {
     const {} = this.state;
-    return (
-      <div>Select Cards</div>
-    )
+    return <div>Select Cards</div>;
   }
 }
 export default App;
