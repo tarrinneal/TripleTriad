@@ -1,7 +1,9 @@
 import React from "react";
+import axios from "axios";
 import anime from "animejs";
 import BoardSlot from "./BoardSlot.jsx";
 import Hand from "./Hand.jsx";
+import Login from "./Login.jsx";
 import cards from "../cardStats.js"
 
 
@@ -9,6 +11,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
+      user: undefined,
       boardState: {
         1: undefined,
         2: undefined,
@@ -38,7 +41,9 @@ class App extends React.Component {
       selectedCard: undefined,
       playerTurn: 1,
       player1Points: 5,
-      player2Points: 5
+      player2Points: 5,
+      loginFailed: false,
+      signupFailed: false
     };
 
     this.handleCardClick = this.handleCardClick.bind(this);
@@ -47,6 +52,8 @@ class App extends React.Component {
     this.turnChange = this.turnChange.bind(this);
     this.endGame = this.endGame.bind(this);
     this.checkPlacedCard = this.checkPlacedCard.bind(this);
+    this.login = this.login.bind(this);
+    this.signup = this.signup.bind(this);
   }
 
   componentDidMount () {
@@ -156,7 +163,7 @@ class App extends React.Component {
     let card = cards[boardState[loc].id - 1]
     const newBoardState = {
       ...boardState
-    }
+    };
     let changes = 0
 
     locationsToCheck[loc].forEach((check) => {
@@ -215,6 +222,65 @@ class App extends React.Component {
     })
   }
 
+  login(user, password) {
+
+    axios.get('/login', {
+      headers: {
+        user,
+        password
+      }
+    })
+      .then(response => {
+        this.setState({
+          user: response.data
+        })
+      })
+      .catch(err => {
+        let temp = "Login failed, please try again";
+        if (err.response.data === "Incorrect Password") {
+          temp = err.response.data;
+        }
+        this.setState({
+          loginFailed: temp
+        }, () => {
+          setTimeout(() => {
+            this.setState({
+            loginFailed: false
+            })
+          }, 2000)
+        })
+      })
+  }
+
+  signup(user, password) {
+    axios.post('/signup', {
+      data: {
+        user,
+        password
+      }
+    })
+      .then(response => {
+        this.setState({
+          user: response.data
+        })
+      })
+      .catch(err => {
+        let temp = "Sign up failed, please try again"
+        if (err.response.data === "User Already Exists") {
+          temp = err.response.data
+        }
+        this.setState({
+          signupFailed: temp
+        }, () => {
+          setTimeout(() => {
+            this.setState({
+              signupFailed: false
+            })
+          }, 2000)
+        })
+      })
+  }
+
   endGame () {
     const {player1Points, player2Points} = this.state;
     if (player1Points > player2Points) {
@@ -257,8 +323,8 @@ class App extends React.Component {
   }
 
   render() {
-    const {boardState, player1, player2, playerTurn, selectedCard} = this.state;
-    return (
+    const {user, boardState, player1, player2, playerTurn, selectedCard, loginFailed, signupFailed} = this.state;
+    return user ? (
       <div id="board">
         <img id="boardImage" src="./img/board-mat.jpg" />
         <Hand player={2} hand={player2} handleCardClick={this.handleCardClick} playerTurn={playerTurn} selectedCard={selectedCard} />
@@ -269,6 +335,8 @@ class App extends React.Component {
         </div>
         <Hand player={1} hand={player1} handleCardClick={this.handleCardClick} playerTurn={playerTurn} selectedCard={selectedCard} />
       </div>
+    ) : (
+      <Login login={this.login} signup={this.signup} loginFailed={loginFailed} signupFailed={signupFailed}/>
     )
   }
 }
