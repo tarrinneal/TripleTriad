@@ -318,7 +318,9 @@ class App extends React.Component {
         14
       ],
       selectedCard: undefined,
-      playerTurn: 1
+      playerTurn: 1,
+      player1Points: 5,
+      player2Points: 5
     }, this.componentDidMount)
   }
 
