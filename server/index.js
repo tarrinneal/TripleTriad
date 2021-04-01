@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
-// const server = require('http').createServer(app).listen(process.env.PORT || 3002);
+const server = require('http').createServer(app)
 require('dotenv').config();
-// const io = require('socket.io').listen(server)
+const io = require('socket.io')(server)
 const port = process.env.PORT || 3002
 const db = require('../database')
 app.use(express.static('public'))
@@ -51,8 +51,10 @@ app.post('/signup', (req, res) => {
     })
 })
 
+io.on('connection', (socket) => {
+  console.log('io connection has been made')
+})
+
 app.listen(port, () => {
   console.log(`listening at ${port}`)
 })
-
-// io.listen(server)
