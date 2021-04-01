@@ -1,7 +1,9 @@
 const express = require('express');
-const io = require('socket.io')
-const UUID = require('node-uuid')
+// const io = require('socket.io')
+// const UUID = require('node-uuid')
 const app = express();
+// const http = require('http')
+// const server = http.createServer(app)
 // const server = require('http').createServer(app)
 require('dotenv').config();
 // const io = require('socket.io')(server)
@@ -11,11 +13,14 @@ app.use(express.static('public'))
 app.use(express.json())
 
 app.get('/', (req, res) => {
-  res.send('hello vorld')
+  // res.sendFile(__dirname.substr(__dirname.length - 7) + '/public/index.html')
+  res.send('hi')
 })
 
-// app.get('/socket.io', (req, res) => {
-//   res.sendFile(__dirname.substr(0, __dirname.length - 7) + '/node_modules/socket.io/client-dist/socket.io.js')
+// app.get('/socket.io/*', (req, res) => {
+//   // res.sendFile(__dirname.substr(0, __dirname.length - 7) + '/node_modules/socket.io/client-dist/socket.io.js')
+//   console.log('hi')
+//   res.send('hi')
 // })
 
 app.get('/login', (req, res) => {
@@ -56,8 +61,23 @@ app.post('/signup', (req, res) => {
       res.status(501).send('Please Try Again')
     })
 })
+
+
+app.listen(port, () => {
+  console.log(`listening at ${port}`)
+})
+
+// server.listen(+port + 1, () => {
+//   console.log('this is up now at ' + (+port + 1))
+// })
+
 // debugger;
-// const sio = io(app)
+// const sio = io()
+// sio.listen(server)
+
+// sio.sockets.on('connection', () => {
+//   console.log('finally')
+// })
 
 // sio.configure(() => {
 //   sio.set('log level', 0);
@@ -89,7 +109,3 @@ app.post('/signup', (req, res) => {
 //   }); //client.on disconnect
 
 // }); //sio.sockets.on connection
-
-app.listen(port, () => {
-  console.log(`listening at ${port}`)
-})

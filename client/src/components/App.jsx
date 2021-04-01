@@ -57,17 +57,18 @@ class App extends React.Component {
   }
 
   componentDidMount () {
+    const {user} = this.state
     let reroll = () => {
       return Math.floor(Math.random() * 110 + 1)
     }
     this.setState({
-      player1: [
-        reroll(),
-        reroll(),
-        reroll(),
-        reroll(),
-        reroll()
-      ],
+      // player1: [
+      //   reroll(),
+      //   reroll(),
+      //   reroll(),
+      //   reroll(),
+      //   reroll()
+      // ],
       player2: [
         reroll(),
         reroll(),
@@ -223,7 +224,6 @@ class App extends React.Component {
   }
 
   login(user, password) {
-
     axios.get('/login', {
       headers: {
         user,
@@ -232,7 +232,8 @@ class App extends React.Component {
     })
       .then(response => {
         this.setState({
-          user: response.data
+          user: response.data,
+          player1: this.playerCardPicker(response.data)
         })
       })
       .catch(err => {
@@ -261,7 +262,8 @@ class App extends React.Component {
     })
       .then(response => {
         this.setState({
-          user: response.data
+          user: response.data,
+          player1: this.playerCardPicker(response.data)
         })
       })
       .catch(err => {
@@ -281,8 +283,25 @@ class App extends React.Component {
       })
   }
 
+  playerCardPicker(user) {
+    let num = user.cards.length;
+    const picker = () => {
+      return Math.floor(Math.random() * num) + 1
+    }
+    let order = new Set();
+    while (order.size < 5) {
+      let num = picker()
+      order.add(num)
+    }
+    let result = []
+    order.forEach(i => {
+      result.push(user.cards[i - 1].id)
+    })
+    return result
+  }
+
   endGame () {
-    const {player1Points, player2Points} = this.state;
+    const {player1Points, player2Points, user} = this.state;
     if (player1Points > player2Points) {
       alert('Player 1 Wins!')
     } else if (player2Points > player1Points) {
@@ -303,13 +322,7 @@ class App extends React.Component {
         9: undefined,
       },
       placedCards: 0,
-      player1: [
-        1,
-        2,
-        3,
-        4,
-        5
-      ],
+      player1: this.playerCardPicker(user),
       player2: [
         10,
         11,

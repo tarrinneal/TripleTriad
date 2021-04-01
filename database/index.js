@@ -24,6 +24,9 @@ const login = (user) => {
 }
 
 const signup = (user, password) => {
+  let num = () => {
+    return Math.floor(Math.random() * 110) + 1
+  }
   let newUser = {
     user: user,
     password: password,
@@ -49,13 +52,32 @@ const signup = (user, password) => {
       {
         id: 5,
         quantity: 1
+      },
+      {
+        id: num(),
+        quantity: 1
+      },
+      {
+        id: num(),
+        quantity: 1
+      },
+      {
+        id: num(),
+        quantity: 1
+      },
+      {
+        id: num(),
+        quantity: 1
+      },
+      {
+        id: num(),
+        quantity: 1
       }
     ]
   }
 
   return Users.create(newUser)
 }
-
 
 module.exports = {
   login,
