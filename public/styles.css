@@ -49,6 +49,9 @@ body {
   margin: 0;
   grid-template-columns: 4% 8% 8% 8% 8% auto 25%;
   grid-template-rows: 4% 15% 15% 15% auto;
+  transform: translateX(0px);
+  /* transition-duration: 0.25; */
+  transition: transform 0.25s;
 }
 
 .card.player1card1,
@@ -144,6 +147,8 @@ body {
 .card.selected {
   border: yellow 3px;
   transform: translateX(-25px);
+  /* transition-duration: 0.25; */
+  transition: transform 0.25s;
 }
 
 .player1card1,
