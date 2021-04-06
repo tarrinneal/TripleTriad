@@ -51,7 +51,16 @@ body {
   grid-template-rows: 4% 15% 15% 15% auto;
 }
 
-.card.player1card1, .card.player1card2, .card.player1card3, .card.player1card4, .card.player1card5, .card.player2card1, .card.player2card2, .card.player2card3, .card.player2card4, .card.player2card5 {
+.card.player1card1,
+.card.player1card2,
+.card.player1card3,
+.card.player1card4,
+.card.player1card5,
+.card.player2card1,
+.card.player2card2,
+.card.player2card3,
+.card.player2card4,
+.card.player2card5 {
   display: grid;
   width: 100%;
   height: 100%;
@@ -118,7 +127,7 @@ body {
   grid-row: 2;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(5, 16.7%) ;
+  grid-template-rows: repeat(5, 16.7%);
   overflow: visible;
   width: 65%;
   margin: 0 auto;
@@ -132,26 +141,32 @@ body {
   grid-column: 1;
 }
 
-.hand.selected {
-
+.card.selected {
+  border: yellow 3px;
+  transform: translateX(-25px);
 }
 
-.player1card1, .player2card1 {
+.player1card1,
+.player2card1 {
   z-index: 4;
 }
 
-.player1card2, .player2card2 {
+.player1card2,
+.player2card2 {
   z-index: 6;
 }
 
-.player1card3, .player2card3 {
+.player1card3,
+.player2card3 {
   z-index: 8;
 }
 
-.player1card4, .player2card4 {
+.player1card4,
+.player2card4 {
   z-index: 10;
 }
 
-.player1card5, .player2card5 {
+.player1card5,
+.player2card5 {
   z-index: 12;
 }
